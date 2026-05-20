@@ -1,6 +1,7 @@
 from .models import *
 from rest_framework import serializers
 from django.core.exceptions import ObjectDoesNotExist
+from .fields import Base64ImageField
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -20,6 +21,8 @@ class LevelSerializer(serializers.ModelSerializer):
 
 
 class ImagesSerializer(serializers.ModelSerializer):
+    data = Base64ImageField()
+
     class Meta:
         model = Images
         fields = ['data', 'title']
@@ -39,7 +42,7 @@ class PerevalSerializer(serializers.ModelSerializer):
         user_data = validated_data.pop('user')
         coords_data = validated_data.pop('coords')
         level_data = validated_data.pop('level')
-        images_data = validated_data.pop('images')
+        images_data = validated_data.pop('images', [])
 
         try:
             user = User.objects.get(email=user_data['email'])
@@ -57,7 +60,11 @@ class PerevalSerializer(serializers.ModelSerializer):
             status='new',
         )
 
-        for image in images_data:
-            Images.objects.create(pereval=pereval, **image)
+        for image_data in images_data:
+            image_serializer = ImagesSerializer(data=image_data)
+            if image_serializer.is_valid():
+                image_instance = image_serializer.save(pereval=pereval)
+            else:
+                raise serializers.ValidationError("Error saving images")
 
         return pereval

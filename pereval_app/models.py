@@ -43,4 +43,4 @@ class Pereval(models.Model):
 class Images(models.Model):
     pereval = models.ForeignKey(Pereval, on_delete=models.CASCADE, related_name='images')
     title = models.CharField(max_length=100, blank=True, null=True)
-    data = models.CharField(blank=True, null=True)
+    data = models.ImageField(upload_to="uploads/", blank=True, null=True)
