@@ -69,3 +69,18 @@ class SubmitDataView(APIView):
                 {"message": f"Ошибка сервера: {str(e)}", "status": 500},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )
+
+class SubmitDataDetailView(APIView):
+    def get(self,request,id):
+        try:
+            pereval = Pereval.objects.get(id=id)
+            serializer = PerevalSerializer(pereval)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        except Pereval.DoesNotExist:
+            return Response(
+                {
+                    'status': status.HTTP_404_NOT_FOUND,
+                    'message': "Перевал не найден",
+                },
+                status=status.HTTP_404_NOT_FOUND
+            )
