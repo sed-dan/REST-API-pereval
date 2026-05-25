@@ -29,7 +29,7 @@ python -m .venv .venv
 source .venv/bin/activate
 ```
 
-4. **Устанавливаем необходимые биьлиотеки**:
+4. **Устанавливаем необходимые библиотеки**:
 ```bash
 pip install -r requirements.txt
 ```
@@ -43,12 +43,12 @@ FSTR_DB_HOST=
 FSTR_DB_PORT=
 ```
 
-6. **Применяем миграции**
+6. **Применяем миграции**:
 ```bash  
 python manage.py migrate
 ```
 
-7. **Запускаем сервер**
+7. **Запускаем сервер**:
 ```bash 
 python manage.py runserver
 ```
@@ -56,7 +56,7 @@ python manage.py runserver
 ## 🛠 Технологии
 
 * Сервис реализован с помощью Django Rest Framework.
-* В качестве базы данных используется PostgreSQL.
+* База данных PostgreSQL.
 * В проекте реализованна обработка изображений в закодированном base64 поле.
 * Автоматическая документация **Swagger**
 *  Deploy
