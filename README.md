@@ -17,10 +17,6 @@
   - `accepted`
   - `rejected`
 
-## Демонстрация
-
-![Спискок ](ссылка_на_картинку.gif)
-
 ## ⚙️ Установка и локальный запуск проекта
 
 1. **Клонируем репозиторий**:
@@ -62,7 +58,7 @@ FSTR_DB_PORT=
 python manage.py migrate
 ```
 
-7. **Запускаем сервер**:
+7. **Запускаем локальный сервер**:
 ```bash 
 python manage.py runserver
 ```
@@ -73,5 +69,7 @@ python manage.py runserver
 - База данных PostgreSQL.
 - В проекте реализованна обработка изображений в закодированном base64 поле.
 - Автоматическая документация **Swagger**
--  Deploy
+- Сервис развернут на сервере *pythonanywhere.com*
+  - [API](https://drfpereval.pythonanywhere.com/api/)
+  - [swagger](https://drfpereval.pythonanywhere.com/swagger/)
 
