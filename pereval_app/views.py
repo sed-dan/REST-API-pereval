@@ -6,8 +6,9 @@ from .models import Pereval
 
 
 class PerevalViewSet(viewsets.ModelViewSet):
-    queryset = Pereval.objects.all()
+    queryset = Pereval.objects.all().order_by('id')
     serializer_class = PerevalSerializer
+    filterset_fields = ('user__email',)
 
 
 class SubmitDataView(APIView):
@@ -19,7 +20,7 @@ class SubmitDataView(APIView):
                 return Response(
                     {
                         'status': status.HTTP_200_OK,
-                        'message': 'Запись успешно создана',
+                        'message': 'Запись успешно создана.',
                         'id': serializer.instance.id
                     },
                     status=status.HTTP_200_OK
@@ -48,7 +49,7 @@ class SubmitDataView(APIView):
 
         if not email:
             return Response(
-                {"message": "Не указан email пользователя", "status": 400},
+                {"message": "Не указан email пользователя.", "status": 400},
                 status=status.HTTP_400_BAD_REQUEST
             )
 
@@ -57,7 +58,7 @@ class SubmitDataView(APIView):
 
             if not pereval_list.exists():
                 return Response(
-                    {"message": "Нет записей для указанного пользователя", "status": 404},
+                    {"message": "Нет записей для указанного пользователя.", "status": 404},
                     status=status.HTTP_404_NOT_FOUND
                 )
 
@@ -80,7 +81,7 @@ class SubmitDataDetailView(APIView):
             return Response(
                 {
                     'status': status.HTTP_404_NOT_FOUND,
-                    'message': "Перевал не найден",
+                    'message': "Перевал не найден.",
                 },
                 status=status.HTTP_404_NOT_FOUND
             )
@@ -96,12 +97,12 @@ class SubmitDataDetailView(APIView):
 
         if pereval.status != 'new':
             return Response(
-                {"state": 0, "message": "Запись нельзя редактировать в данном статусе"},
+                {"state": 0, "message": "Запись нельзя редактировать в данном статусе."},
                 status=status.HTTP_400_BAD_REQUEST
             )
 
         if 'user' in request.data:
-            return Response({"state": 0, "message": "Нельзя редактировать данные пользователя"},
+            return Response({"state": 0, "message": "Нельзя редактировать данные пользователя."},
                             status=status.HTTP_400_BAD_REQUEST
                             )
 
