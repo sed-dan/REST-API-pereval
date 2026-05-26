@@ -69,7 +69,7 @@ python manage.py runserver
 - База данных PostgreSQL.
 - В проекте реализованна обработка изображений в закодированном base64 поле.
 - Автоматическая документация **Swagger**
-- Сервис развернут на сервере *pythonanywhere.com*
+- Сервис опубликован на хостинге *pythonanywhere.com*
   - [API](https://drfpereval.pythonanywhere.com/api/)
   - [swagger](https://drfpereval.pythonanywhere.com/swagger/)
 
